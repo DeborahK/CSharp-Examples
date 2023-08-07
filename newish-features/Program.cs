@@ -102,6 +102,17 @@ static void StringInterpolation()
     ";
   Console.WriteLine($"Verbatim Interpolated:\n {header6}");
 
+  string header6a = @$"
+      <div class=""card"">
+        <div class=""card-header"">
+          {(pageTitle == ""
+           ? "No title"
+           : pageTitle)}
+        </div>
+      </div>
+    ";
+  Console.WriteLine($"Verbatim Multiline Interpolated:\n {header6a}");
+
   // Raw interpolated string
   string header7 = $"""
       <div class="card">
@@ -111,6 +122,17 @@ static void StringInterpolation()
       </div>
     """;
   Console.WriteLine($"Raw Interpolated:\n {header7}");
+
+  string header7a = $"""
+      <div class="card">
+        <div class="card-header">
+          {(pageTitle == ""
+           ? "No title"
+           : pageTitle)}
+        </div>
+      </div>
+    """;
+  Console.WriteLine($"Raw Multiline Interpolated:\n {header7a}");
 
   decimal price = 19416.13M;
   string vehicleJSON2 = $$"""
