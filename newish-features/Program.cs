@@ -61,7 +61,7 @@ static void StringInterpolation()
   Console.WriteLine($"Interpolated answer:\n {answer}");
 
   string header31 = $"Header: {pageTitle.ToUpper()}";
-  Console.WriteLine($"Interpolated toUpper:\n {header31}");
+  Console.WriteLine($"Interpolated ToUpper:\n {header31}");
 
   var PrepareTitle = new Func<string, string>(message => $"<h1>{message}</h1>");
   string header32 = $"Header: {PrepareTitle(pageTitle)}";
@@ -266,8 +266,7 @@ static void SwitchAndPatterns()
   };
   Console.WriteLine($"Discard pattern: {itemText4}");
 
-  int? quantity5 = 4;
-  string itemText5 = quantity5 switch
+  string itemText5 = CountItems() switch
   {
     0 => "No items",
     1 => "One item",
@@ -276,7 +275,9 @@ static void SwitchAndPatterns()
   };
   Console.WriteLine($"Variable pattern: {itemText5}");
 
-  // var (variable) pattern
+  int? CountItems() => 8;
+
+  // var pattern or variable pattern
   string itemText51 = GetName() switch
   {
     "" or null => "No match",
@@ -287,10 +288,9 @@ static void SwitchAndPatterns()
   };
   Console.WriteLine($"Variable pattern: {itemText51}");
 
-  int? quantity6 = 2;
   bool inStock = true;
   bool creditApproved = true;
-  string itemText6 = quantity6 switch
+  string itemText6 = CountItems() switch
   {
     0 => "No items",
     null => "Not specified",
@@ -443,13 +443,15 @@ static void RecordFeatures()
     ZeroTo60 = 2.7M
   };
   Console.WriteLine($"Vehicle1 == Vehicle1a: {vehicle1 == vehicle1a}"); // false
-  Console.WriteLine($"Vehicle1: {vehicle1}");
+  // Display class details
+  Console.WriteLine(vehicle1); // Vehicle
 
   // Create and populate a record
   var vehicle2 = new VehicleData(2, "Model Y", 99_990M, 5, 3.5M);
   var vehicle2a = new VehicleData(2, "Model Y", 99_990M, 5, 3.5M);
   Console.WriteLine($"Vehicle2 == Vehicle2a: {vehicle2 == vehicle2a}"); // true
-  Console.WriteLine($"Vehicle2: {vehicle2}");
+  // Display record details
+  Console.WriteLine(vehicle2); // Vehicle { ... }
 
   // Record, deconstruct, and positional pattern matching
   var bestFor = vehicle2 switch
@@ -514,10 +516,11 @@ public class Order
 public class Vehicle
 {
   public required int Id { get; init; }
+  // Expression bodied members
   private string? name = string.Empty;
   public string? Name
   {
-    get => name;
+    get => name.ToUpper();
     set => name = value;
   }
   public decimal? Price { get; set; }
