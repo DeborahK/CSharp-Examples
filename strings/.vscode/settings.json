@@ -1,0 +1,11 @@
+{
+  "files.autoSave": "afterDelay",
+  "debug.console.fontSize": 20,
+  "editor.quickSuggestions": {
+    "other": "off",
+    "comments": "off",
+    "strings": "off"
+  },
+  "editor.parameterHints.enabled": false,
+  // "editor.hover.enabled": false
+}
