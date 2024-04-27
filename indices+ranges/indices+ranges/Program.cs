@@ -3,8 +3,6 @@
 
 // Task 1: Pull items from the end of an array
 
-using System.ComponentModel.DataAnnotations;
-
 string[] cast = { "Frodo", "Bilbo", "Gandalf", "Aragorn", "Arwen", "Eowyn"};
 
 // Original technique
