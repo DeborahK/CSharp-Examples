@@ -3,10 +3,12 @@
 
 // Task 1: Pull items from the end of an array
 
-string[] cast = { "Frodo", "Bilbo", "Gandalf", "Aragorn", "Arwen", "Eowyn"};
+// string[] cast = { "Frodo", "Bilbo", "Gandalf", "Aragorn", "Arwen", "Eowyn"};
+// New C# 12 collection expression
+string[] cast = ["Frodo", "Bilbo", "Gandalf", "Aragorn", "Arwen", "Eowyn"];
 
 // Original technique
-string lastPersonOrg = cast[cast.Length-1];
+string lastPersonOrg = cast[cast.Length - 1];
 Console.WriteLine(lastPersonOrg);
 
 // C# 8
@@ -26,7 +28,9 @@ Index bang = ^1;                        // Define it in a variable (optional)
 Console.WriteLine(text[bang]);          // Last character
 Console.WriteLine(text[^text.Length]);  // First character
 
-List<string> items = new() { "ring", "sword", "bow", "axe"};
+//List<string> items = new() { "ring", "sword", "bow", "axe" };
+// New C# 12 collection expression
+List<string> items = ["ring", "sword", "bow", "axe"];
 Console.WriteLine(items[^1]);  // Last item
 Console.WriteLine(items[^2]);  // Second to last item
 
@@ -57,10 +61,11 @@ Console.WriteLine(someText[some]);  // Just some
 Console.WriteLine(someText[..4]);   // First word
 
 // Task 3: Pass a range to a method
-void displayStats(int[] sequence, Range range) {
+void displayStats(int[] sequence, Range range)
+{
   Console.WriteLine($"Min: {sequence[range].Min()}");
   Console.WriteLine($"Max: {sequence[range].Max()}");
   Console.WriteLine($"Ave: {sequence[range].Average()}");
 }
-displayStats(new int[] {10,20,30,40,50}, 2..4);
-displayStats(new int[] {10,20,30,40,50}, 1..^1);
+displayStats(new int[] { 10, 20, 30, 40, 50 }, 2..4);
+displayStats(new int[] { 10, 20, 30, 40, 50 }, 1..^1);

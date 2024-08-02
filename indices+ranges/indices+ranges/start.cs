@@ -2,10 +2,12 @@
 
 // Task 1: Pull items from the end of an array
 // string[] cast = { "Frodo", "Bilbo", "Gandalf", "Aragorn", "Arwen", "Eowyn"};
+// New C# 12 collection expression
+// string[] cast = ["Frodo", "Bilbo", "Gandalf", "Aragorn", "Arwen", "Eowyn"];
 // Console.WriteLine(String.Join(", ", cast));
 
 // Task 2: Pull a subset of items from an array
-// string[] cast = { "Frodo", "Bilbo", "Gandalf", "Aragorn", "Arwen", "Eowyn"};
+// string[] cast = ["Frodo", "Bilbo", "Gandalf", "Aragorn", "Arwen", "Eowyn"];
 // Console.WriteLine(String.Join(", ", cast));
 
 // Task 3: Pass a range to a method
