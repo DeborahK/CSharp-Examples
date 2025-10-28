@@ -3,9 +3,14 @@
 
 // Task 1: Pull items from the end of an array
 
-// string[] cast = { "Frodo", "Bilbo", "Gandalf", "Aragorn", "Arwen", "Eowyn"};
+string[] cast0 = new string[] { "Frodo", "Bilbo", "Gandalf", "Aragorn", "Arwen", "Eowyn"};
 // New C# 12 collection expression
 string[] cast = ["Frodo", "Bilbo", "Gandalf", "Aragorn", "Arwen", "Eowyn"];
+string[] extendedCast = [.. cast, "Legolas"];
+
+Console.WriteLine(String.Join(", ", cast0));
+Console.WriteLine(String.Join(", ", cast));
+Console.WriteLine(String.Join(", ", extendedCast));
 
 // Original technique
 string lastPersonOrg = cast[cast.Length - 1];
