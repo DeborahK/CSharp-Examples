@@ -1,12 +1,33 @@
 ﻿global using System.Diagnostics.CodeAnalysis;
 
 // Leverages top-level statements
+ExtensionMembers();
 StringFeatures();
 StringInterpolation();
 StringIndentation();
 SwitchAndPatterns();
 PropertyFeatures();
 RecordFeatures();
+
+static void ExtensionMembers()
+{
+  // C# 3, .NET 3.5 (November 2007)
+  string title = "Lord of the Rings: Return of the King.";
+  Console.WriteLine($"Original message: {title}");
+
+  // Use the extension method to truncate the string
+  string truncatedMessage = title.Truncate(15);
+  Console.WriteLine($"Truncated message: {truncatedMessage}");
+
+  // C#14, .NET 9 (November 2025)
+
+}
+
+public static class StringExtensions
+{
+  public static string Truncate(this string value, int maxLength)
+      => value.Length <= maxLength ? value : value[..maxLength];
+}
 
 static void StringFeatures()
 {
@@ -554,3 +575,5 @@ public record VehicleData2
   public int Passengers { get; init; }
   public decimal ZeroTo60 { get; init; }
 }
+
+

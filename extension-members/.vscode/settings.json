@@ -1,0 +1,4 @@
+{
+  "dotnet.defaultSolution": "newish-features.sln",
+  "editor.codeLens": false
+}
