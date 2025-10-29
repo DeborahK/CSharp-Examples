@@ -93,10 +93,11 @@ Console.WriteLine(vehicleJSONVerbatim);
 
 // C# 11
 // Raw string literals (triple quotes)
+Console.WriteLine("Raw string literal");
 string vehicleJSONRaw = """
   {
     "id": 1,
-    "name:": "AT-AT",
+    "name": "AT-AT",
     "price": 1999.99
   }
   """;
