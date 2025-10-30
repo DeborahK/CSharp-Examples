@@ -74,8 +74,6 @@ static void PartialClasses()
       Console.WriteLine("Successfully validated.");
     }
   }
-
-
 }
 
 public class Person

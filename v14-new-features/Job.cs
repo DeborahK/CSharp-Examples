@@ -6,7 +6,7 @@ namespace VehicleSales;
 // Manual implementation part of the partial class
 partial class Job
 {
-    // Declaration of the partial event
+  // Declaration of the partial event
   public partial event PropertyChangedEventHandler? PropertyChanged;
 
   // Implementation of the partial constructor
