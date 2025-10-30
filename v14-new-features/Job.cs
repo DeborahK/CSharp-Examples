@@ -4,7 +4,7 @@ using System.ComponentModel;
 namespace VehicleSales;
 
 // Manual implementation part of the partial class
-partial class Job
+public partial class Job
 {
   // Declaration of the partial event
   public partial event PropertyChangedEventHandler? PropertyChanged;
