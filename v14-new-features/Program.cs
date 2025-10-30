@@ -1,8 +1,11 @@
 ﻿// Leverages top-level statements
 using System.ComponentModel;
+using System.Threading.Tasks.Dataflow;
+using VehicleSales;
 
 AutoProperties();
 NullConditionals();
+PartialClasses();
 
 static void AutoProperties()
 {
@@ -41,7 +44,41 @@ static void NullConditionals()
   Console.WriteLine($"New person: {person?.FirstName ?? "(null)"}");
 }
 
-class Person
+static void PartialClasses()
+{
+  List<Job> jobs = [
+    new Job { Title = "Developer", Department = "IT", Salary = 75000 },
+    new Job { Title = "", Department = "Cafeteria", Salary = 30000 },
+    new Job { Title = "Software Manager", Department = "", Salary = 150000 },
+    new Job { Title = "Sales Rep", Department = "Sales", Salary = -5000 }
+  ];
+
+  // Demonstrate partial event
+  Job currentJob = new();
+  currentJob.PropertyChanged += (sender, e) =>
+    Console.WriteLine($"Property: '{e.PropertyName}' changed on Job: '{(sender as Job)?.Title}'");
+  currentJob.Title = "Architect";
+  currentJob.Department = "IT";
+  currentJob.Salary = 120000;
+
+  // Use partial class validation methods
+  foreach (var job in jobs)
+  {
+    Console.Write($"{job.Title}: ");
+    if (!job.IsValid(out var errors))
+    {
+      Console.WriteLine($"{string.Join(", ", errors)}");
+    }
+    else
+    {
+      Console.WriteLine("Successfully validated.");
+    }
+  }
+
+
+}
+
+public class Person
 {
   // Auto-property with v14 field keyword
   public string? FirstName { get; set => field = value?.Trim(); }
@@ -49,7 +86,7 @@ class Person
   public Address? Address { get; set; }
 }
 
-class PersonPreV14
+public class PersonPreV14
 {
   private string? firstName;
   public string? FirstName
@@ -62,7 +99,7 @@ class PersonPreV14
   public Address? Address { get; set; }
 }
 
-class PersonWithPropertyChanged : INotifyPropertyChanged
+public class PersonWithPropertyChanged : INotifyPropertyChanged
 {
   public string? FirstName
   {
@@ -87,7 +124,7 @@ class PersonWithPropertyChanged : INotifyPropertyChanged
   }
 }
 
-class Address
+public class Address
 {
   public string? Street { get; set; }
   public string? City { get; set; }
