@@ -1,11 +1,16 @@
+#nullable enable
 using System.ComponentModel;
+
 namespace VehicleSales;
 
 // Manual implementation part of the partial class
 partial class Job
 {
+    // Declaration of the partial event
+  public partial event PropertyChangedEventHandler? PropertyChanged;
+
   // Implementation of the partial constructor
-  public partial Job() : this("Untitled", "Unassigned", 0) { }
+  public partial Job() : this("Untitled", "Unassigned", 0m) { }
   public partial Job(string title, string department, decimal salary)
   {
     Title = title;
@@ -23,7 +28,4 @@ partial class Job
       _ => 14
     };
   }
-
-  // Declaration of the partial event
-  public partial event PropertyChangedEventHandler? PropertyChanged;
 }
