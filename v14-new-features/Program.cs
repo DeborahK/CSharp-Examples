@@ -1,6 +1,5 @@
 ﻿// Leverages top-level statements
 using System.ComponentModel;
-using System.Threading.Tasks.Dataflow;
 using VehicleSales;
 
 AutoProperties();
@@ -9,6 +8,9 @@ PartialClasses();
 
 static void AutoProperties()
 {
+  Console.WriteLine();
+  Console.WriteLine("*** Demo: Auto-properties with field");
+
   Person? person = new Person();
   person?.FirstName = " Rosie ";
   Console.WriteLine($"Trimmed name: *{person?.FirstName}*");
@@ -16,6 +18,9 @@ static void AutoProperties()
 
 static void NullConditionals()
 {
+  Console.WriteLine();
+  Console.WriteLine("*** Demo: Null conditional assignment");
+
   // Assign a null person
   Person? person = null;
 
@@ -31,21 +36,41 @@ static void NullConditionals()
 
   // v14 null conditional assignment
   person?.FirstName = "Rosie";
-  // Outputs "Null person: (null)"
-  Console.WriteLine($"Null person: {person?.FirstName ?? "(null)"}");
+  Console.WriteLine($"Null person name: {person?.FirstName ?? "(null)"}");
+
+  // Won't execute setter code
+  person?.LastName = "Cotton";
 
   person?.Address?.City = "Hobbiton";
   Console.WriteLine($"Null address: {person?.Address?.City ?? "(null)"}");
 
+  // Also works with +=/-=
+  person?.Age += 1;
+  Console.WriteLine($"Null person age: {person?.Age}");
+
+  // But not ++ or --
+  // Will throw a compile-time error
+  //person?.Age++;
+
   // Assign a new Person object
   person = new Person();
   person?.FirstName = "Rosie";
-  // Outputs "New person: Rosie"
-  Console.WriteLine($"New person: {person?.FirstName ?? "(null)"}");
+  Console.WriteLine($"First Name: {person?.FirstName ?? "(null)"}");
+
+  // Will execute setter code
+  person?.LastName = "Cotton";
+
+  // Also works with +=
+  person?.Age += 1;
+  Console.WriteLine($"Age: {person?.Age}");
+
 }
 
 static void PartialClasses()
 {
+  Console.WriteLine();
+  Console.WriteLine("*** Demo: Partial classes, constructors, methods, and events");
+
   List<Job> jobs = [
     new Job { Title = "Developer", Department = "IT", Salary = 75000 },
     new Job { Title = "", Department = "Cafeteria", Salary = 30000 },
@@ -80,8 +105,16 @@ public class Person
 {
   // Auto-property with v14 field keyword
   public string? FirstName { get; set => field = value?.Trim(); }
-  public string? LastName { get; set; }
+  public string? LastName
+  {
+    get; set
+    {
+      field = value?.Trim();
+      Console.WriteLine($"Last name changed: {field}");
+    }
+  }
   public Address? Address { get; set; }
+  public int Age { get; set; }
 }
 
 public class PersonPreV14

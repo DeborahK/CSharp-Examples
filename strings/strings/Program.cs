@@ -262,7 +262,6 @@ Console.WriteLine(itemTextGuard);
 // Guard must be a boolean expression
 // Great for complex conditionals
 // Recall that order matters!
-
 bool inStock = true;
 bool creditApproved = true;
 string itemTextGuards = CountItems() switch
