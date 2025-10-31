@@ -11,7 +11,7 @@ static void ExtensionMembers()
   string truncatedMessage_v3 = title.Truncate_V3(17);
   Console.WriteLine($"Truncated message with v3: {truncatedMessage_v3}");
 
-  // C#14, .NET 9 (November 2025)
+  // C#14, .NET 10 (November 2025)
   string truncatedMessage_v14 = title.Truncate_V14(17);
   Console.WriteLine($"Truncated message with v14: {truncatedMessage_v14}");
   Console.WriteLine($"Word count: {title.WordCount_V14}");
@@ -20,31 +20,34 @@ static void ExtensionMembers()
 
   // Collection initializer syntax (C# 9, .NET 5 or later)
   Console.WriteLine("------ Creating lists ------");
-  List<string> hobbitNames = ["Frodo", "Sam", "Bilbo"];
-  List<string> humanNames = ["Boromir", "Faramir"];
-  Console.WriteLine($"List of Hobbits: {string.Join(", ", hobbitNames)}");
+  List<string> hobbits = ["Frodo", "Sam", "Bilbo"];
+  List<string> humans = ["Boromir", "Faramir"];
+  Console.WriteLine($"Hobbits: {string.Join(", ", hobbits)}");
 
   // Use the instance extension method to add an item if it doesn't exist
-  Console.WriteLine("------ Adding Merry and Frodo ------");
-  hobbitNames.AddIfNotExists("Merry");
-  hobbitNames.AddIfNotExists("Frodo"); // Duplicate, won't be added
-  Console.WriteLine($"Updated list of Hobbits: {string.Join(", ", hobbitNames)}");
+  Console.WriteLine("------ Adding more hobbits ------");
+  hobbits.AddIfNotExists("Merry");
+  hobbits.AddIfNotExists("Frodo"); // Duplicate, won't be added
+
+  // Fluent chaining
+  if (hobbits.AddIfNotExists("Pippin")) Console.WriteLine("Added Pippin");
+
+  Console.WriteLine($"Updated hobbits: {string.Join(", ", hobbits)}");
 
   // Use the instance extension property to retrieve the last item or null
-  string? lastHobbit = hobbitNames.LastOrNull;
-  Console.WriteLine($"Last hobbit in the list: {lastHobbit}");
+  string? lastHobbit = hobbits.LastOrNull;
+  Console.WriteLine($"Last hobbit: {lastHobbit}");
 
   // Use the static extension operator to concatenate the lists
-  List<string> allNames = hobbitNames + humanNames;
-  Console.WriteLine($"All names: {string.Join(", ", allNames)}");
+  List<string> all = hobbits + humans;
+  Console.WriteLine($"All names: {string.Join(", ", all)}");
 
   // Use the static extension property to get an empty list
   // Then check if it's empty using the instance extension property
   Console.WriteLine("Creating an empty list...");
-  List<string> emptyList = List<string>.Empty;
-  Console.WriteLine($"Is this list empty? {emptyList.IsEmpty}");
-  string? lastItem = emptyList.LastOrNull;
-  Console.WriteLine($"Last item in the list: {lastItem}");
+  List<string> empty = List<string>.EmptyList;
+  Console.WriteLine($"Is empty? {empty.IsEmpty}");
+  Console.WriteLine($"Last item: {empty.LastOrNull ?? "(null)"}");
 }
 
 // C# 3, .NET 3.5 (November 2007)
@@ -66,6 +69,7 @@ public static class StringExtensions_V14
     public string Truncate_V14(int maxLength)
       => value.Length <= maxLength ? value : value[..maxLength];
 
+    // Could use ReadOnlySpan<char> for better performance with large strings
     public int WordCount_V14
       => string.IsNullOrWhiteSpace(value) ? 0
         : value.Split(' ', StringSplitOptions.RemoveEmptyEntries).Length;
@@ -103,14 +107,15 @@ public static class CustomExtensions
     public T? LastOrNull => list.Count == 0 ? default : list[^1];
 
     // Instance extension method
-    public void AddIfNotExists(T item)
+    public bool AddIfNotExists(T item)
     {
-      if (!list.Contains(item))
-        list.Add(item);
+      if (list.Contains(item)) return false;
+      list.Add(item);
+      return true;
     }
 
     // Static extension property
-    public static List<T> Empty => [];
+    public static List<T> EmptyList => [];
 
     // Static extension operator
     public static List<T> operator +(List<T> first, List<T> second)
