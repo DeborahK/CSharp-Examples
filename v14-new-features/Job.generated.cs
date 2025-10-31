@@ -61,7 +61,7 @@ public partial class Job
   }
 
   // Declaration of the partial method
-  public partial void CalculateMaxVacationDays();
+  partial void CalculateMaxVacationDays();
 
   // Declarations of the partial constructor
   public partial Job();

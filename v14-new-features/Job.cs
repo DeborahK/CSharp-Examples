@@ -16,7 +16,7 @@ public partial class Job
   }
 
   // Implementation of the partial method
-  public partial void CalculateMaxVacationDays()
+  partial void CalculateMaxVacationDays()
   {
     MaxVacationDays = Department switch
     {
@@ -37,6 +37,5 @@ public partial class Job
   // The raiser
   protected void OnPropertyChanged(string propertyName) =>
       _propertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-
 
 }
