@@ -101,22 +101,6 @@ static void PartialClasses()
   }
 }
 
-public class Person
-{
-  // Auto-property with v14 field keyword
-  public string? FirstName { get; set => field = value?.Trim(); }
-  public string? LastName
-  {
-    get; set
-    {
-      field = value?.Trim();
-      Console.WriteLine($"Last name changed: {field}");
-    }
-  }
-  public Address? Address { get; set; }
-  public int Age { get; set; }
-}
-
 public class PersonPreV14
 {
   private string? firstName;
@@ -128,6 +112,25 @@ public class PersonPreV14
 
   public string? LastName { get; set; }
   public Address? Address { get; set; }
+}
+
+public class Person
+{
+  // Auto-property with v14 field keyword
+  // Concise expression-bodied syntax
+  public string? FirstName { get; set => field = value?.Trim(); }
+
+  // Expanded syntax block to include additional logic
+  public string? LastName
+  {
+    get; set
+    {
+      field = value?.Trim();
+      Console.WriteLine($"Last name changed: {field}");
+    }
+  }
+  public Address? Address { get; set; }
+  public int Age { get; set; }
 }
 
 public class PersonWithPropertyChanged : INotifyPropertyChanged
