@@ -71,34 +71,22 @@ static void PartialClasses()
   Console.WriteLine();
   Console.WriteLine("*** Demo: Partial classes, constructors, methods, and events");
 
-  List<Job> jobs = [
-    new Job { Title = "Developer", Department = "IT", Salary = 75000 },
-    new Job { Title = "", Department = "Cafeteria", Salary = 30000 },
-    new Job { Title = "Software Manager", Department = "", Salary = 150000 },
-    new Job { Title = "Sales Rep", Department = "Sales", Salary = -5000 }
-  ];
+  // Demonstrate first partial constructor
+  Job currentJob = new() { Title = "Developer", Department = "IT", Salary = 75000 };
+  Console.WriteLine($"Current Job Title: {currentJob.Title}, Department: {currentJob.Department}, Salary: {currentJob.Salary}");
 
   // Demonstrate partial event
-  Job currentJob = new();
   currentJob.PropertyChanged += (sender, e) =>
     Console.WriteLine($"Property: '{e.PropertyName}' changed on Job: '{(sender as Job)?.Title}'");
-  currentJob.Title = "Architect";
-  currentJob.Department = "IT";
-  currentJob.Salary = 120000;
 
-  // Use partial class validation methods
-  foreach (var job in jobs)
-  {
-    Console.Write($"{job.Title}: ");
-    if (!job.IsValid(out var errors))
-    {
-      Console.WriteLine($"{string.Join(", ", errors)}");
-    }
-    else
-    {
-      Console.WriteLine("Successfully validated.");
-    }
-  }
+  currentJob.Title = "Architect";
+  currentJob.Salary = 120000;
+  Console.WriteLine($"New Job Title: {currentJob.Title}, Department: {currentJob.Department}, Salary: {currentJob.Salary}");
+
+  // Demonstrate parameterless partial constructor
+  Job emptyJob = new();
+  Console.WriteLine($"Empty Job Title: {emptyJob.Title}, Department: {emptyJob.Department}, Salary: {emptyJob.Salary}");
+
 }
 
 public class PersonPreV14

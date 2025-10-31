@@ -6,9 +6,6 @@ namespace VehicleSales;
 // Manual implementation part of the partial class
 public partial class Job
 {
-  // Declaration of the partial event
-  public partial event PropertyChangedEventHandler? PropertyChanged;
-
   // Implementation of the partial constructor
   public partial Job() : this("Untitled", "Unassigned", 0m) { }
   public partial Job(string title, string department, decimal salary)
@@ -28,4 +25,18 @@ public partial class Job
       _ => 14
     };
   }
+
+  // Implementation of the partial event
+  private PropertyChangedEventHandler? _propertyChanged;
+  public partial event PropertyChangedEventHandler? PropertyChanged
+  {
+    add { _propertyChanged += value; }
+    remove { _propertyChanged -= value; }
+  }
+
+  // The raiser
+  protected void OnPropertyChanged(string propertyName) =>
+      _propertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
+
 }
