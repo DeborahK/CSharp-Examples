@@ -50,7 +50,7 @@ public partial class Job
   public int MaxVacationDays
   {
     get => field;
-    set
+    private set
     {
       if (field != value)
       {

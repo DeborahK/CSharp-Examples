@@ -76,12 +76,17 @@ static void PartialClasses()
   Console.WriteLine($"Current Job Title: {currentJob.Title}, Department: {currentJob.Department}, Salary: {currentJob.Salary}");
 
   // Demonstrate partial event
-  currentJob.PropertyChanged += (sender, e) =>
+  PropertyChangedEventHandler handler = (sender, e) =>
     Console.WriteLine($"Property: '{e.PropertyName}' changed on Job: '{(sender as Job)?.Title}'");
+  currentJob.PropertyChanged += handler;
 
   currentJob.Title = "Architect";
   currentJob.Salary = 120000;
   Console.WriteLine($"New Job Title: {currentJob.Title}, Department: {currentJob.Department}, Salary: {currentJob.Salary}");
+  Console.WriteLine($"MaxVacationDays: {currentJob.MaxVacationDays}");
+
+  // Unsubscribe
+  currentJob.PropertyChanged -= handler;
 
   // Demonstrate parameterless partial constructor
   Job emptyJob = new();
