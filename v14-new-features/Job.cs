@@ -1,6 +1,3 @@
-#nullable enable
-using System.ComponentModel;
-
 namespace VehicleSales;
 
 // Manual implementation part of the partial class
