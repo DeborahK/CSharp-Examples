@@ -1,3 +1,4 @@
+// C# 10 file-scoped namespace declaration
 namespace VehicleSales;
 
 // Manual implementation part of the partial class
