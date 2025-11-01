@@ -1,5 +1,4 @@
 ﻿// Leverages top-level statements
-using System.ComponentModel;
 using VehicleSales;
 
 AutoProperties();
@@ -50,7 +49,7 @@ static void NullConditionals()
 
   // But not ++ or --
   // Will throw a compile-time error
-  //person?.Age++;
+  // person?.Age++;
 
   // Assign a new Person object
   person = new Person();
@@ -71,8 +70,8 @@ static void PartialClasses()
   Console.WriteLine();
   Console.WriteLine("*** Demo: Partial classes, constructors, methods, and events");
 
-  // Demonstrate first partial constructor
-  Job currentJob = new() { Title = "Developer", Department = "IT", Salary = 75000 };
+  // Demonstrate parameterized partial constructor
+  Job currentJob = new("Developer", "IT", 75000);
   Console.WriteLine($"Current Job Title: {currentJob.Title}, Department: {currentJob.Department}, Salary: {currentJob.Salary}");
 
   // Demonstrate partial event
@@ -94,6 +93,7 @@ static void PartialClasses()
 
 }
 
+// Pre-v14 implementation without field keyword
 public class PersonPreV14
 {
   private string? firstName;
@@ -107,6 +107,7 @@ public class PersonPreV14
   public Address? Address { get; set; }
 }
 
+// v14 implementation with field keyword
 public class Person
 {
   // Auto-property with v14 field keyword

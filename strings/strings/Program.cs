@@ -157,6 +157,15 @@ string vehicleJSONInterpolationRaw = $$"""
 """;
 Console.WriteLine(vehicleJSONInterpolationRaw);
 
+// Extensible!
+// Three dollar signs!
+string extensibleheader = $$$"""
+      <div class="card">
+        {{vehicleName}}
+      </div>
+    """;
+Console.WriteLine("Extensible header:");
+Console.WriteLine(extensibleheader);
 
 // Task 6: Display different text based on the quantity (Switch statement -> Switch expression)
 
