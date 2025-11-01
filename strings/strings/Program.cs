@@ -3,8 +3,8 @@
 // Ctrl + K Ctrl + ,
 
 RawStringLiterals();
-// RawStringInterpolation();
-// PatternMatching();
+RawStringInterpolation();
+PatternMatching();
 
 void RawStringLiterals()
 {
@@ -151,12 +151,12 @@ void RawStringInterpolation()
   // Allows multiple lines of text and interpolation
   // Use double dollars and double curly braces for the replacement string
   string vehicleJSONInterpolationRaw = $$"""
-{
-  "id": 1,
-  "name:": "{{vehicleName}}",
-  "price": {{price}}
-}
-""";
+    {
+      "id": 1,
+      "name:": "{{vehicleName}}",
+      "price": {{price}}
+    }
+    """;
   Console.WriteLine(vehicleJSONInterpolationRaw);
 
   // Extensible!
