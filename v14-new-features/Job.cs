@@ -4,6 +4,11 @@ namespace VehicleSales;
 // Manual implementation part of the partial class
 public partial class Job
 {
+  // Implementation of the partial property (C# 13)
+  public partial bool isOnCommission {
+    get => Department == "Sales";
+  }
+
   // Implementation of the partial constructor
   public partial Job() : this("Untitled", "Unassigned", 0m) { }
   public partial Job(string title, string department, decimal salary)

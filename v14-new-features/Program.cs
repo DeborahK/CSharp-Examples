@@ -83,6 +83,7 @@ static void PartialClasses()
   currentJob.Salary = 120000;
   Console.WriteLine($"New Job Title: {currentJob.Title}, Department: {currentJob.Department}, Salary: {currentJob.Salary}");
   Console.WriteLine($"MaxVacationDays: {currentJob.MaxVacationDays}");
+  Console.WriteLine($"IsOnCommission: {currentJob.isOnCommission}");
 
   // Unsubscribe
   currentJob.PropertyChanged -= handler;
