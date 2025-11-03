@@ -198,6 +198,7 @@ void PatternMatching()
   // Uses pattern matching
   // Compiler ensures all cases are covered
   // Discard operator (underscore) is the "catch all"
+  Console.WriteLine("*** Switch expression:");
   string itemText = quantity switch
   {
     0 => "No items",
@@ -221,6 +222,7 @@ void PatternMatching()
   // C# 9
   // Relational pattern
   // Uses relational operators to test the value
+  Console.WriteLine("*** Relational pattern:");
   string itemTextRelational = quantity switch
   {
     <= 0 => "No items",
@@ -232,6 +234,7 @@ void PatternMatching()
   // C# 9
   // Logical pattern
   // Combine or negate with and, or, not
+  Console.WriteLine("*** Logical pattern:");
   string itemTextLogical = quantity switch
   {
     0 => "No items",
@@ -246,6 +249,7 @@ void PatternMatching()
   // Variable (or var) pattern
   // Declare a variable using var
   // Useful when the switch is an expression
+  Console.WriteLine("*** Var pattern:");
   int CountItems()
   {
     return 18;
@@ -262,6 +266,7 @@ void PatternMatching()
   // Variable (or var) pattern with when (case guard)
   // Declare a variable using var
   // Notice the when syntax, it must be a boolean expression
+  Console.WriteLine("*** Case guards:");
   string itemTextGuard = CountItems() switch
   {
     0 => "No items",
@@ -277,6 +282,7 @@ void PatternMatching()
   // Guard must be a boolean expression
   // Great for complex conditionals
   // Recall that order matters!
+  Console.WriteLine("*** Case guards with variables:");
   bool inStock = true;
   bool creditApproved = true;
   string itemTextGuards = CountItems() switch
@@ -289,12 +295,10 @@ void PatternMatching()
   };
   Console.WriteLine(itemTextGuards);
 
-
-  // Task 7: Display different text based on the quantity with tuple pattern
-
   // C# 8
   // Tuple pattern
   // Switch on a set of values defined with a tuple
+  Console.WriteLine("*** Tuple pattern:");
   string itemTextTuple = (quantity, inStock, creditApproved) switch
   {
     ( <= 0 or null, _, _) => "No items",
@@ -305,6 +309,17 @@ void PatternMatching()
   };
   Console.WriteLine(itemTextTuple);
 
+  // Can use labels for clarity
+  Console.WriteLine("*** Tuple pattern with labels:");
+  string itemTextTupleLabel = (quantity, inStock, creditApproved) switch
+  {
+    (quantity: <= 0 or null, inStock: _, creditApproved: _) => "No items",
+    (_, false, _) => "Out of stock",
+    (1, true, _) => "One item",
+    (_, true, true) => $"{quantity} approved items",
+    _ => "Credit not approved for more than 1 item"
+  };
+  Console.WriteLine(itemTextTupleLabel);
 
   // Task 8: Display different text based on the quantity with type pattern
 
@@ -313,6 +328,7 @@ void PatternMatching()
   // Switch on the type
   // Useful with generics
   // Correctly types the switched value (info)
+  Console.WriteLine("*** Type pattern:");
   string PrepareMessage<T>(IEnumerable<T> info)
   {
     string message = info switch
@@ -335,6 +351,7 @@ void PatternMatching()
   // List pattern
   // _ => discard: match one
   // .. => slice: match 0 or more (can only be used once)
+  Console.WriteLine("*** List pattern:");
   int[] item = { 1, 2, 3, 4, 5 };
   string itemTextList = item switch
   {
