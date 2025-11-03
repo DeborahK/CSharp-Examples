@@ -1,4 +1,7 @@
 {
   "dotnet.defaultSolution": "newish-features.sln",
-  "editor.codeLens": false
+  "editor.codeLens": false,
+  "github.copilot.enable": {
+    "*": false
+  }
 }

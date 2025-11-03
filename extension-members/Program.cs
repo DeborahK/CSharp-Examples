@@ -1,4 +1,6 @@
 ﻿// Leverages top-level statements
+using System.Numerics;
+
 ExtensionMembers();
 
 static void ExtensionMembers()
@@ -12,9 +14,9 @@ static void ExtensionMembers()
   Console.WriteLine($"Truncated message with v3: {truncatedMessage_v3}");
 
   // C#14, .NET 10 (November 2025)
-  string truncatedMessage_v14 = title.Truncate_V14(17);
+  string truncatedMessage_v14 = title.Truncate(17);
   Console.WriteLine($"Truncated message with v14: {truncatedMessage_v14}");
-  Console.WriteLine($"Word count: {title.WordCount_V14}");
+  Console.WriteLine($"Word count: {title.WordCount}");
 
   // --------------------------//
 
@@ -44,10 +46,16 @@ static void ExtensionMembers()
 
   // Use the static extension property to get an empty list
   // Then check if it's empty using the instance extension property
-  Console.WriteLine("Creating an empty list...");
+  Console.WriteLine("------ Creating an empty list ------ ");
   List<string> empty = List<string>.EmptyList;
   Console.WriteLine($"Is empty? {empty.IsEmpty}");
   Console.WriteLine($"Last item: {empty.LastOrNull ?? "(null)"}");
+
+  // Use the generic math extension method to generate a range of numbers
+  // Extension method does not appear on string
+  Console.WriteLine("------ Generating a range of numbers ------");
+  var numbers = int.Range(12,6);
+  Console.WriteLine(string.Join(", ", numbers));
 }
 
 // C# 3, .NET 3.5 (November 2007)
@@ -60,48 +68,25 @@ public static class StringExtensions_V3
 }
 
 // C#14, .NET 9 (November 2025)
-public static class StringExtensions_V14
-{
-  // Extension declaration for strings
-  // Uses expression-bodied members
-  extension(string value)
-  {
-    public string Truncate_V14(int maxLength)
-      => value.Length <= maxLength ? value : value[..maxLength];
-
-    // Could use ReadOnlySpan<char> for better performance with large strings
-    public int WordCount_V14
-      => string.IsNullOrWhiteSpace(value) ? 0
-        : value.Split(' ', StringSplitOptions.RemoveEmptyEntries).Length;
-  }
-}
-
-// Extension declaration for strings
-// Using normal properties and methods (not expression-bodied members)
 public static class CustomExtensions
 {
   // Extension declaration for strings
   extension(string value)
   {
+    // Instance extension method
     public string Truncate(int maxLength)
-    {
-      return value.Length <= maxLength ? value : value[..maxLength];
-    }
+      => value.Length <= maxLength ? value : value[..maxLength];
 
+    // Instance extension property
     public int WordCount
-    {
-      get
-      {
-        return string.IsNullOrWhiteSpace(value) ? 0
-              : value.Split(' ', StringSplitOptions.RemoveEmptyEntries).Length;
-      }
-    }
+      => string.IsNullOrWhiteSpace(value) ? 0
+        : value.Split(' ', StringSplitOptions.RemoveEmptyEntries).Length;
   }
 
   // Extension declaration for List<T>
   extension<T>(List<T> list)
   {
-    // Instance extension properties
+    // Instance extension property
     public bool IsEmpty => list.Count == 0;
     // Uses index from end operator (C# 8.0 and later)
     public T? LastOrNull => list.Count == 0 ? default : list[^1];
@@ -121,4 +106,16 @@ public static class CustomExtensions
     public static List<T> operator +(List<T> first, List<T> second)
           => first.Concat(second).ToList();
   }
+
+  // Extension declaration with constraint
+  // Expose factory methods in places that make sense
+  // C# 11 generic math support
+  extension<T>(T source) where T : INumber<T>
+  {
+    public static IEnumerable<T> Range(T start, int count)
+    {
+      for (int i = 0; i < count; i++) yield return start++;
+    }
+  }
+
 }
