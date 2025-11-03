@@ -5,7 +5,8 @@ namespace VehicleSales;
 public partial class Job
 {
   // Implementation of the partial property (C# 13)
-  public partial bool isOnCommission {
+  public partial bool isOnCommission
+  {
     get => Department == "Sales";
   }
 

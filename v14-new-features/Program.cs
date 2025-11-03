@@ -118,7 +118,8 @@ public class Person
   // Expanded syntax block to include additional logic
   public string? LastName
   {
-    get; set
+    get;
+    set
     {
       field = value?.Trim();
       Console.WriteLine($"Last name changed: {field}");
