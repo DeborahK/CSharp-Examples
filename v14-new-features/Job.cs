@@ -11,6 +11,7 @@ public partial class Job
   }
 
   // Implementation of the partial constructor
+  // Only the implementing part can include base() or this()
   public partial Job() : this("Untitled", "Unassigned", 0m) { }
   public partial Job(string title, string department, decimal salary)
   {

@@ -23,15 +23,21 @@ static void NullConditionals()
   // Assign a null person
   Person? person = null;
 
-  // This line would throw a NullReferenceException
+  // Will throw a NullReferenceException
   // string? firstName = person.LastName;
 
   // Safe member access with null-conditional operator
   string? firstName = person?.FirstName;
 
   // But what about this?
-  // This will throw a NullReferenceException
+  // Will throw a NullReferenceException
   // person.FirstName = "Rosie";
+
+  // Would require an if condition
+  if (person != null)
+  {
+    person.FirstName = "Rosie";
+  }
 
   // v14 null conditional assignment
   person?.FirstName = "Rosie";
