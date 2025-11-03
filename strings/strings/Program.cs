@@ -352,12 +352,13 @@ void PatternMatching()
   // _ => discard: match one
   // .. => slice: match 0 or more (can only be used once)
   Console.WriteLine("*** List pattern:");
-  int[] item = { 1, 2, 3, 4, 5 };
+  int[] item = [1, 2, 3, 4, 5];
   string itemTextList = item switch
   {
     [1, _, 3, ..] => "Has 1, 3, and more",
-    [.., 4, _] => "Contains a 4",
+    [.., 4, _] => "Contains a 4 in the second to last position",
     [.., 5] => "Ends with a 5",
+    [_, .. var middle, _] => $"Middle elements: {string.Join(", ", middle)}",
     _ => "Something else"
   };
   Console.WriteLine(itemTextList);

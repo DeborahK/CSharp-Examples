@@ -114,6 +114,7 @@ public static class CustomExtensions
   {
     public static IEnumerable<T> Range(T start, int count)
     {
+      // Lazy evaluation
       for (int i = 0; i < count; i++) yield return start++;
     }
   }
