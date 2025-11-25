@@ -59,8 +59,8 @@ void RawStringLiterals()
     if (newVehicle)
     {
       string congrats = """
-      Congratulations on your new vehicle!
-      We hope you enjoy driving it!
+        Congratulations on your new vehicle!
+        We hope you enjoy driving it!
       """;
       Console.WriteLine(congrats);
     }
@@ -144,6 +144,7 @@ void RawStringInterpolation()
     ""name:"": ""{vehicleName}"",
     ""price"": {price}
   }}";
+  Console.WriteLine("Verbatim String Literal:");
   Console.WriteLine(vehicleJSONInterpolation);
 
   // C# 11
@@ -157,6 +158,7 @@ void RawStringInterpolation()
       "price": {{price}}
     }
     """;
+  Console.WriteLine("Raw String Literal:");
   Console.WriteLine(vehicleJSONInterpolationRaw);
 
   // Extensible!
@@ -166,7 +168,7 @@ void RawStringInterpolation()
         {{pageTitle}}: {{{vehicleName}}}
       </div>
     """;
-  Console.WriteLine("Extensible header:");
+  Console.WriteLine("Extensible:");
   Console.WriteLine(extensibleheader);
 }
 
@@ -210,14 +212,14 @@ void PatternMatching()
   // C# 8
   // Order is important
   // Pattern is unreachable error
-  // string itemText = quantity switch
+  // string itemTextOrder = quantity switch
   // {
   //   0 => "No items",
   //   1 => "One item",
   //   _ => $"{quantity} items",
   //   2 => "Two items"
   // };
-  // Console.WriteLine(itemText);
+  // Console.WriteLine(itemTextOrder);
 
   // C# 9
   // Relational pattern
@@ -301,7 +303,7 @@ void PatternMatching()
   Console.WriteLine("*** Tuple pattern:");
   string itemTextTuple = (quantity, inStock, creditApproved) switch
   {
-    ( <= 0 or null, _, _) => "No items",
+    (<= 0 or null, _, _) => "No items",
     (_, false, _) => "Out of stock",
     (1, true, _) => "One item",
     (_, true, true) => $"{quantity} approved items",
@@ -313,8 +315,8 @@ void PatternMatching()
   Console.WriteLine("*** Tuple pattern with labels:");
   string itemTextTupleLabel = (quantity, inStock, creditApproved) switch
   {
-    (quantity: <= 0 or null, inStock: _, creditApproved: _) => "No items",
-    (_, false, _) => "Out of stock",
+    (quantity: <= 0 or null, _, _) => "No items",
+    (_, inStock: false, _) => "Out of stock",
     (1, true, _) => "One item",
     (_, true, true) => $"{quantity} approved items",
     _ => "Credit not approved for more than 1 item"

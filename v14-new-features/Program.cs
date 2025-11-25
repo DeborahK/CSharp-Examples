@@ -44,7 +44,7 @@ static void NullConditionals()
   Console.WriteLine($"Null person name: {person?.FirstName ?? "(null)"}");
 
   // Won't execute setter code
-  person?.LastName = "Cotton";
+  person?.LastName = " Cotton ";
 
   person?.Address?.City = "Hobbiton";
   Console.WriteLine($"Null address: {person?.Address?.City ?? "(null)"}");
@@ -63,7 +63,7 @@ static void NullConditionals()
   Console.WriteLine($"First Name: {person?.FirstName ?? "(null)"}");
 
   // Will execute setter code
-  person?.LastName = "Cotton";
+  person?.LastName = " Cotton ";
 
   // Also works with +=
   person?.Age += 1;
@@ -128,7 +128,7 @@ public class Person
     set
     {
       field = value?.Trim();
-      Console.WriteLine($"Last name changed: {field}");
+      Console.WriteLine($"Last name changed: *{field}*");
     }
   }
   public Address? Address { get; set; }
